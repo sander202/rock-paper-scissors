@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function computerPlay(number) {
+            if (number === 0) {
+                return "Rock";
+            } else if (number === 1) {
+                return "Paper";
+            } else {
+                return "Scissors";
+            }
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            while (playerSelection.toLowerCase() === "rock") {
+                if (computerSelection === "Rock") {
+                    return "This is a draw!";
+                } else if (computerSelection === "Paper") {
+                    losses++;
+                    return " You lose! Paper beats rock";
+                } else {
+                    wins++;
+                    return "You win! Rock beats scissors";
+                }
+            }
+
+            while (playerSelection.toLowerCase() === "paper") {
+                if (computerSelection === "Paper") {
+                    return "This is a draw!";
+                } else if (computerSelection === "Scissors") {
+                    losses++;
+                    return " You lose! Scissors beats paper";
+                } else {
+                    wins++;
+                    return "You win! Paper beats rock";
+                }
+            }
+
+            while (playerSelection.toLowerCase() === "scissors") {
+                if (computerSelection === "Scissors") {
+                    return "This is a draw!";
+                } else if (computerSelection === "Rock") {
+                    losses++;
+                    return "You lose! Rock beats scissors";
+                } else {
+                    wins++;
+                    return "You win! Scissors beats paper";
+                }
+            }
+
+        }
+
+        function game() {
+            for (let i = 0; i < 5; i++) {
+                let player = window.prompt("Enter your choice");
+                let result = playRound(player, computerPlay(Math.floor(Math.random() * 3)));
+                console.log(result);
+            }
+            if (wins > losses) {
+                console.log("You win! " + wins + " wins and " + losses + " losses.");
+            } else if (wins === losses) {
+                console.log("Draw! " + wins + " wins and " + losses + " losses.");
+            } else {
+                console.log("You lose! " + wins + " wins and " + losses + " losses.");
+            }
+        }
+
+        let wins = 0;
+        let losses = 0;
+        game();
+        
+    </script>
+</body>
+</html>
