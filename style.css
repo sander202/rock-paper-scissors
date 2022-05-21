@@ -1,0 +1,49 @@
+body {
+    background-color: bisque;
+}
+
+.instructions {
+    text-align: center;
+}
+
+.scoreContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 200px;
+    margin-bottom: 30px;
+}
+
+.rps {
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.message {
+    text-align: center;
+}
+
+#winner {
+    font-size: 56px;
+}
+
+#result {
+    font-size: 32px;
+}
+
+.main-btn {
+    height: 180px;
+    width: 250px;
+    border-radius: 30px;
+    font-size: 32px;
+}
+
+.main-btn:hover {
+    transform: scale(1.1);
+}
+
+#score {
+    font-size: 32px;
+}

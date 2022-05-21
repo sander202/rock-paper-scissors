@@ -4,79 +4,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div class="instructions">Play rock, paper, scissors against the computer by pressing the buttons below! Reach 5 wins first to win the game.</div>
+    <div class="scoreContainer">
+        <div id="score"></div> 
+    </div>
+    <div class="rps">
+        <button id="rock" class="main-btn">Rock</button>
+        <button id="paper" class="main-btn">Paper</button>
+        <button id="scissors" class="main-btn">Scissors</button>
+    </div>
+    <div class="message">
+        <div id="result"></div>
+        <div id="winner"></div>
+    </div>
+    
     <script>
 
-        function computerPlay(number) {
+        function computerPlay() {
+            const number = Math.floor(Math.random() * 3);
             if (number === 0) {
-                return "Rock";
+                return "rock";
             } else if (number === 1) {
-                return "Paper";
+                return "paper";
             } else {
-                return "Scissors";
+                return "scissors";
             }
         }
 
-        function playRound(playerSelection, computerSelection) {
-            while (playerSelection.toLowerCase() === "rock") {
-                if (computerSelection === "Rock") {
-                    return "This is a draw!";
-                } else if (computerSelection === "Paper") {
+        function playRound(playerSelection, computerSelection) {       
+            
+            if (playerSelection === "rock") {
+                if (computerSelection === "rock") {
+                    result.textContent = 'Draw!';
+                    draws++;
+                } else if (computerSelection === "paper") {
                     losses++;
-                    return " You lose! Paper beats rock";
+                    result.textContent = 'You lose! Paper beats rock';
                 } else {
                     wins++;
-                    return "You win! Rock beats scissors";
+                    result.textContent = 'You win! Rock beats scissors';
                 }
-            }
-
-            while (playerSelection.toLowerCase() === "paper") {
-                if (computerSelection === "Paper") {
-                    return "This is a draw!";
-                } else if (computerSelection === "Scissors") {
+            } else if (playerSelection === "paper") {
+                if (computerSelection === "paper") {
+                    result.textContent = 'Draw!';
+                    draws++;
+                } else if (computerSelection === "scissors") {
                     losses++;
-                    return " You lose! Scissors beats paper";
+                    result.textContent = 'You lose! Scissors beats paper';
                 } else {
                     wins++;
-                    return "You win! Paper beats rock";
+                    result.textContent = 'You win! Paper beats rock';
                 }
-            }
-
-            while (playerSelection.toLowerCase() === "scissors") {
-                if (computerSelection === "Scissors") {
-                    return "This is a draw!";
-                } else if (computerSelection === "Rock") {
+            } else {
+                if (computerSelection === "scissors") {
+                    result.textContent = 'Draw!';
+                    draws++;
+                } else if (computerSelection === "rock") {
                     losses++;
-                    return "You lose! Rock beats scissors";
+                    result.textContent = 'You lose! Rock beats scissors';
                 } else {
                     wins++;
-                    return "You win! Scissors beats paper";
+                    result.textContent = 'You win! Scissors beats paper';
                 }
-            }
-
+            }            
         }
 
         function game() {
-            for (let i = 0; i < 5; i++) {
-                let player = window.prompt("Enter your choice");
-                let result = playRound(player, computerPlay(Math.floor(Math.random() * 3)));
-                console.log(result);
-            }
-            if (wins > losses) {
-                console.log("You win! " + wins + " wins and " + losses + " losses.");
-            } else if (wins === losses) {
-                console.log("Draw! " + wins + " wins and " + losses + " losses.");
-            } else {
-                console.log("You lose! " + wins + " wins and " + losses + " losses.");
-            }
+
+            const buttons = document.querySelectorAll('.main-btn');
+            const score = document.querySelector('#score');
+            const winner = document.querySelector('#winner');
+          
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {       
+                    playRound(button.id, computerPlay()); 
+                    score.textContent = wins + ' wins, ' + draws + ' draws and ' + losses + ' losses';
+                    winner.textContent = '';
+                    if (wins >= 5 || losses >=5) {
+                        result.textContent = '';
+                        if (wins > losses) {
+                            winner.textContent = 'You won the game! :D';
+                            wins = 0;
+                            draws = 0;
+                            losses = 0;
+                            score.textContent = '';
+                        } else {
+                            winner.textContent = 'You lost the game :(';
+                            wins = 0;
+                            draws = 0;
+                            losses = 0;
+                            score.textContent = ''; 
+                            }
+                        }                     
+                })
+            })
         }
 
+        const result = document.querySelector('#result');
         let wins = 0;
-        let losses = 0;
+        let draws = 0;
+        let losses = 0;       
         game();
-        
+
     </script>
 </body>
 </html>
